@@ -4,6 +4,8 @@ using TuesdayDemo.Data.Models;
 
 namespace TuesdayDemo.Controllers
 {
+    [Route("api/[Controller]")]
+    [ApiController]
     public class StatesController : Controller
     {
         private readonly IState _state;
@@ -11,10 +13,7 @@ namespace TuesdayDemo.Controllers
         {
                 _state = state;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
         [HttpGet]
         [Route("GetAllStates")]
         public IActionResult GetAllStates()

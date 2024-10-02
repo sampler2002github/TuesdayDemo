@@ -4,6 +4,8 @@ using TuesdayDemo.Data.Models;
 
 namespace TuesdayDemo.Controllers
 {
+    [Route("api/[Controller]")]
+    [ApiController]
     public class CitiesController : Controller
     {
         private readonly ICity _city;
@@ -11,10 +13,7 @@ namespace TuesdayDemo.Controllers
         {
             _city = city;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
         [HttpGet]
         [Route("GetAllCities")]
         public IActionResult GetAllCities()

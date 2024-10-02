@@ -9,5 +9,7 @@ namespace TuesdayDemo.Data.Interface
         bool DeleteUser(int Id);
         List<User> GetAllUsers();
         User GetUserById(int Id);
+
+        //User Aathentication(Login login);
     }
 }

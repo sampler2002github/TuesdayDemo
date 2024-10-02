@@ -4,6 +4,8 @@ using TuesdayDemo.Data.Models;
 
 namespace TuesdayDemo.Controllers
 {
+    [Route("api/[Controller]")]
+    [ApiController]
     public class UsersController : Controller
     {
         private readonly IUser _user;
@@ -11,10 +13,7 @@ namespace TuesdayDemo.Controllers
         {
             _user = user;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
         [HttpGet]
         [Route("GetAllUsers")]
         public IActionResult GetAllUsers()

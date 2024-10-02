@@ -15,6 +15,7 @@ namespace TuesdayDemo.Data
         public DbSet<State> Statetbl { get; set; }
         public DbSet<City> Citytbl{ get; set; }
         public DbSet<User> Users { get; set; }
+        
     }
 }
  

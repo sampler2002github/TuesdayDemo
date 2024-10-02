@@ -13,10 +13,12 @@ using TuesdayDemo.Data.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 
-var policyName = "CorsPolicy";
+//var policyName = "CorsPolicy";
 
-builder.Services.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlServer (builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -36,15 +38,13 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:3004")
+            policy.WithOrigins("http://localhost:3007")
             .AllowAnyHeader()
             .AllowAnyMethod();
         });
 });
 
 // Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -53,8 +53,8 @@ builder.Services.AddSwaggerGen();
 
 //Add Repositry Services..............................
 builder.Services.AddScoped<ICountry, CountriesRepositry>();
-builder.Services.AddScoped<IState,StatesRepositry>();
-builder.Services.AddScoped<ICity,CitiesRepositry>();
+builder.Services.AddScoped<IState, StatesRepositry>();
+builder.Services.AddScoped<ICity, CitiesRepositry>();
 builder.Services.AddScoped<IUser, UsersRepositry>();
 //End Repositry Services..............................
 var app = builder.Build();
@@ -66,18 +66,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
-
-app.UseAuthentication();
-app.UseRouting();
 app.UseCors();
 
+app.MapControllers();
 
 app.Run();
 

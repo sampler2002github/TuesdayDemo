@@ -4,18 +4,15 @@ using TuesdayDemo.Data.Models;
 
 namespace TuesdayDemo.Controllers
 {
+    [Route("api/[Controller]")]
+    [ApiController]
     public class CountriesController : Controller
     {
         private readonly ICountry _country; //called instance of country
         public CountriesController(ICountry country)
         {
             _country = country;
-        } 
-      
-        public IActionResult Index()
-        {
-            return View();
-        }
+        }  
         [HttpGet]
         [Route("GetAllCountries")]
         public IActionResult GetAllCountries()
